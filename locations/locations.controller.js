@@ -4,9 +4,20 @@
 const router = require('express').Router()
 const locationsService = require('./locations.service')
 
-router.get('/locations', (req, res) => {
-	return res.status(200).send({locations: []})
+router.get('/locations', async (req, res) => {
+	return res.status(200).send(await locationsService.findAll())
 })
+
+
+router.get('/locations/:id', async (req, res) => { //working
+	return res.status(200).send(await locationsService.querybyID(req.params.id));
+})
+
+router.delete('/locations/:id', async(req, res) => { //working
+	return res.status(200).send(await locationsService.deleteByID(req.params.id));
+})
+
+
 
 
 module.exports = router
