@@ -1,15 +1,20 @@
+//REQUIREMENTS
 const express = require('express');
 const mongoose = require('mongoose');
-const locationController = require('./locations/locations.controller')
-require('dotenv').config();
-const userController = require('./users/user.controller');
-const app = express()
-const port = 3000
 const bodyParser = require('body-parser');
+
+//FOLDERS
+const locationController = require('./locations/locations.controller')
+const userController = require('./users/user.controller');
+
+//PARAMETERS
+require('dotenv').config();
+const app = express();
+const port = 3000;
 
 
 app.use(bodyParser.json());
-app.use('/users', userController);
+app.use(locationController);
 //app.use(locationController);
 app.listen(port, () => {
 	console.log(`API listening on port ${port}, visit http://localhost:${port}/`)
