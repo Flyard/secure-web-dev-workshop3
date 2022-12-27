@@ -37,17 +37,38 @@ async function deleteByID(_id) {
     }
 }
 
-async function updateDocument(_id) {
-    Location.findByIdAndUpdate(_id, {filmName : 'Hello World'},  (err, data) => {
-        if(err){
-            console.log(err);
-        }
-        else {
-            console.log(data);
-        }
-    })
+async function updateDocument(filter, update) {
+    try {
+        return Location.findOneAndUpdate(filter, update);
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
 }
 
+async function createDocument() {
+        const newLocation = new Location();
+        newLocation.filmType = req.body.filmType;
+        newLocation.filmProducerName = req.body.filmProducerName;
+        newLocation.endDate = req.body.endDate;
+        newLocation.filmName = req.body.filmName;
+        newLocation.district= req.body.district;
+        newLocation.geolocation = req.body.geolocation;
+        newLocation.sourceLocationId = req.body.sourceLocationId;
+        newLocation.filmDirectorName = req.body.filmDirectorName;
+        newLocation.address = req.body.address;
+        newLocation.startDate = req.body.startDate;
+        newLocation.year = req.body.year;
+
+        try {
+            newLocation.save();
+            return console.log("location saved");
+        } catch (err) {
+            console.error(err);
+            return null;
+        }
+        
+}
 
 
 module.exports = {
@@ -55,5 +76,6 @@ module.exports = {
 	querybyID,
 	queryFilmName,
 	deleteByID,
-	updateDocument
+	updateDocument, 
+    createDocument
 };
