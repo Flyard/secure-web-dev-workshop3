@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 
 //FOLDERS
 const locationController = require('./locations/locations.controller')
-const userController = require('./users/user.controller');
 
 //PARAMETERS
 require('dotenv').config();
