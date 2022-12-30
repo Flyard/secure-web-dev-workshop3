@@ -33,7 +33,9 @@ async function verify(username, password) {
         if(username == null || password == null) {
             throw new Error("Wrong parameters");
         }
-        const currentUser = User.findOne({username: username});
+        const currentUser = await User.findOne({username: username});
+        console.log('username is:' +currentUser.username);
+        console.log("hash password is:" +currentUser.password);
         const match = await bcrypt.compare(password, currentUser.password);
         return match;
     } catch (err) {
@@ -45,7 +47,7 @@ async function verify(username, password) {
 
 async function findAll() {
     try {
-        return User.find();
+        return User.find().select('-password'); //So that it doensn't show the password.
     } catch (err) {
         console.error(err);
         return null; 
@@ -102,7 +104,7 @@ async function deleteUserByName(username) {
 }
 
 async function generate(id) {
-    return jwt.sign({sub: id}, process.env.JWT_SECRET);
+    return jwt.sign({sub: id}, 'secret');
 }
 
 module.exports = {

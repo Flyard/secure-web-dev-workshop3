@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-require()
 //FOLDERS
 const locationController = require('./locations/locations.controller');
 const userController = require('./user/users.controller');

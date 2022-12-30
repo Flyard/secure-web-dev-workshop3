@@ -15,7 +15,11 @@ passport.use(new LocalStrategy(
                 console.log('Wrong passsword');
                 return done(null, false);
             }
-            return done(null, user);
+            if(usersService.verify(username, password)) {
+                console.log("[-] You're logged in!");
+                return done(null, user);
+            }
+            
         });
     }
 ));
